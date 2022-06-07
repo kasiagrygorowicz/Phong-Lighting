@@ -1,24 +1,23 @@
 public class LightEmitter {
-    private double illumination;
-    private double ambient;
-    private Vector vector;
+    private double illuminationIntensity;
+    private double ambientIntensity;
+    private Point3D coordinates;
 
-    public LightEmitter(double ambient, Vector v, double illumination)
-    {
-        this.ambient = ambient;
-        this.vector = v;
-        this.illumination = illumination;
+    public LightEmitter(double ambientIntensity, Point3D coordinates, double illumination) {
+        this.ambientIntensity = ambientIntensity;
+        this.coordinates = coordinates;
+        this.illuminationIntensity = illumination;
     }
 
-    public Vector getVector() {
-        return vector;
+    public Point3D getCoordinates() {
+        return coordinates;
     }
 
-    public double getAmbient() {
-        return ambient;
+    public double getAmbientIntensity() {
+        return ambientIntensity;
     }
 
-    public double getIllumination() {
-        return illumination;
+    public double getIlluminationIntensity() {
+        return illuminationIntensity;
     }
 }

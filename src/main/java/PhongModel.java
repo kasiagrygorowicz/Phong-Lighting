@@ -1,20 +1,17 @@
 public class PhongModel {
 
-    public static double getLight(Vector observer, Vector normal, LightEmitter lightSource, Material material) {
-        Vector observerVector = new Vector(observer.getX() - normal.getX(), observer.getY() - normal.getY(), observer.getZ() - normal.getZ());
-
-        Vector lightSourceVector = lightSource.getVector();
-        Vector lightVector = new Vector(lightSourceVector.getX() - normal.getX(), lightSourceVector.getY() - normal.getY(), lightSourceVector.getZ() - normal.getZ());
+    public static double getLight(Point3D observer, Vector normalVector, LightEmitter lightSource, Material material) {
+        Vector observerVector = new Vector(observer.getX() - normalVector.getX(), observer.getY() - normalVector.getY(), observer.getZ() - normalVector.getZ());
+        Vector lightVector = new Vector(lightSource.getCoordinates().getX() - normalVector.getX(), lightSource.getCoordinates().getY() - normalVector.getY(), lightSource.getCoordinates().getZ() - normalVector.getZ());
 
         Vector lightVectorNormalized = lightVector.normalize();
-        Vector normalizedNormal = normal.normalize();
-
+        Vector normalizedNormal = normalVector.normalize();
         Vector refNormalized = reflection(lightVectorNormalized, normalizedNormal).normalize();
         Vector observerNormalized = observerVector.normalize();
 
-        return material.getKa() * lightSource.getAmbient() +
-                material.getKd() * lightSource.getIllumination() * normalizedNormal.scalarProduct(lightVectorNormalized) +
-                material.getKs() * lightSource.getIllumination() * Math.pow(refNormalized.scalarProduct(observerNormalized), material.getN());
+        return lightSource.getAmbientIntensity() * material.getBackgroundCoefficient() +
+               lightSource.getIlluminationIntensity() * material.getDirectionCoefficient() * normalizedNormal.scalarProduct(lightVectorNormalized) +
+               lightSource.getIlluminationIntensity() * material.getScatterCoefficient() * Math.pow(refNormalized.scalarProduct(observerNormalized), material.getN());
     }
 
     private static Vector reflection(Vector lightVecNormalized, Vector normalNormalized) {
