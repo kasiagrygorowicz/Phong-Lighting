@@ -17,8 +17,10 @@ public class DrawPanel extends JPanel{
 
     public DrawPanel() {
         am = new ArrayList<>();
-        material = new Material(0.2, 0.4, 0.3, 70, Color.BLUE);
-        material2 = new Material(0.1, 0.6, 0.75, 50, Color.RED);
+//        brass
+        material = new Material(0.329412, 0.780392, 0.992157, 27.8974, Color.BLUE);
+//        copper
+        material2 = new Material(0.19125, 0.7038, 0.256777,12.8, Color.RED);
         material3 = new Material(0.3, 0.7, 0.4, 20, Color.YELLOW);
         setSize(1600, 800);
         setPreferredSize(new Dimension(1600, 800));
