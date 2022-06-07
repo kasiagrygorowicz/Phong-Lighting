@@ -1,5 +1,3 @@
-package main;
-
 public class LightEmitter {
     private double illumination;
     private double ambient;

@@ -1,5 +1,3 @@
-package main;
-
 public class PhongModel {
 
     public static double getLight(Vector observer, Vector normal, LightEmitter lightSource, Material material) {

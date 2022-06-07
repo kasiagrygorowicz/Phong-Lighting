@@ -1,18 +1,14 @@
-package gui;
-
-import main.LightEmitter;
-import main.Material;
-import main.PhongModel;
-import main.Vector;
-
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
-public class DrawPanel extends JPanel {
+
+public class DrawPanel extends JPanel{
 
     private Vector observer;
-    private LightEmitter ls;
+    private LightEmitter light;
     private Material material;
     private Material material2;
     private Material material3;
@@ -26,12 +22,11 @@ public class DrawPanel extends JPanel {
         material3 = new Material(0.3, 0.7, 0.4, 20, Color.YELLOW);
         setSize(1600, 800);
         setPreferredSize(new Dimension(1600, 800));
-        setBackground(Color.GRAY);
-        setVisible(true);
-        this.setFocusable(true);
+        setBackground(Color.BLACK);
+
 
         observer = new Vector(-50, -50, 220);
-        ls = new LightEmitter(0.7, new Vector(200, 180, -450), 0.9);
+        light = new LightEmitter(0.7, new Vector(200, 180, -450), 0.9);
 
     }
 
@@ -53,7 +48,7 @@ public class DrawPanel extends JPanel {
                     if(x*x + y*y <= r*r) {
                         double z = Math.sqrt(r * r - x * x - y * y);
                         normal = new Vector(2*x, 2*y, 2*z);
-                        double il = PhongModel.getLight(observer,  normal, ls,  m);
+                        double il = PhongModel.getLight(observer,  normal, light,  m);
                         Color color = m.getColor();
                         g.setColor(new Color(Math.min((int) (color.getRed()* il), 255),
                                 Math.min((int)(color.getGreen()* il), 255),
@@ -64,4 +59,27 @@ public class DrawPanel extends JPanel {
                 }
             }
         }
+
+
+    public void moveLightSource(LightMovement movement) {
+        int n =50;
+
+        switch(movement){
+
+
+            case UP -> light.getVector().setY(light.getVector().getY()+n);
+            case DOWN -> light.getVector().setY(light.getVector().getY()-n);
+            case RIGHT ->light.getVector().setX(light.getVector().getX()+n);
+            case LEFT ->light.getVector().setX(light.getVector().getX()-n);
+            case FORWARDS ->light.getVector().setZ(light.getVector().getZ()+n);
+            case BACKWARDS ->light.getVector().setZ(light.getVector().getZ()-n);
+
+
+        }
+
+
+
     }
+
+
+}
