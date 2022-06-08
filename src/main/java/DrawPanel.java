@@ -14,11 +14,14 @@ public class DrawPanel extends JPanel {
     public DrawPanel() {
         this.materials = new ArrayList<>();
         // brass
-        Material material1 = new Material(0.329412, 0.780392, 0.992157, 27.8974, Color.decode("#E1C16E"));
-        // copper
-        Material material2 = new Material(0.19125, 0.7038, 0.256777, 12.8, Color.decode("#B87333"));
-        // something
-        Material material3 = new Material(0.3, 0.7, 0.4, 20, Color.BLUE);
+//        Material material1 = new Material(0.329412, 0.780392, 0.992157, 27.8974, Color.decode("#E1C16E"));
+//        // copper
+//        Material material2 = new Material(0.19125, 0.7038, 0.256777, 12.8, Color.decode("#B87333"));
+//        // something
+//        Material material3 = new Material(0.19225, 0.50754, 0.508273, 51.2, Color.decode("#C0C0C0"));
+        Material material1 = new Material(0.2, 0.25, 0.75, 5, Color.decode("#A06A4F"));
+        Material material2 = new Material(0.2, 0.25, 0.75, 10, Color.decode("#A06A4F"));
+        Material material3 = new Material(0.2, 0.25, 0.75, 100, Color.decode("#A06A4F"));
         Collections.addAll(materials, material1, material2, material3);
 
         setSize(1600, 800);
@@ -50,8 +53,8 @@ public class DrawPanel extends JPanel {
                     double lightIntensity = PhongModel.getLight(observer, normalVector, light, material);
                     Color color = material.getColor();
                     g.setColor(new Color(Math.min((int) (color.getRed() * lightIntensity), 255),
-                            Math.min((int) (color.getGreen() * lightIntensity), 255),
-                            Math.min((int) (color.getBlue() * lightIntensity), 255))
+                                         Math.min((int) (color.getGreen() * lightIntensity), 255),
+                                         Math.min((int) (color.getBlue() * lightIntensity), 255))
                     );
                     g.drawRect(i + r + step, j + r + 200, 1, 1);
                 }
